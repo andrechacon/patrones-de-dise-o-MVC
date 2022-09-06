@@ -1,12 +1,15 @@
 const express = require('express');
 const app = express();
+const path = require('path');
+const PORT = 3000;
 
-app.get('/', function(req, res) {
-    res.send('hello world');
-  });
+const mainRouter = require('./routes/mainRouter');
 
+app.use(express.static(path.join(__dirname, "/public")));
 
+app.use('/', mainRouter); 
 
-app.listen(3000, ()=>{
-    console.log('Servidor funcionando');
-    });
+app.listen(PORT, () => console.log(`
+    Servidor escuchando en el puerto ${PORT}
+    http://localhost:${PORT}
+`))
